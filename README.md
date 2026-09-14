@@ -1,59 +1,57 @@
-# PublishingPlatform
+# PublishHub - Modern Publishing Platform
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.6.
+A modern content publishing and discovery platform built with Angular, integrating live Dev.to content alongside local article drafting, discovery, and bookmarking features.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🌐 Live Demo & Repository
 
-```bash
-ng serve
-```
+- **Live Deployment:** [https://publishing-platform-agfyxdgx1-shreyaskhorgade-7781.vercel.app](https://publishing-platform-agfyxdgx1-shreyaskhorgade-7781.vercel.app)
+- **GitHub Repository:** [https://github.com/U-B-O-T-S/PublishingPlatform](https://github.com/U-B-O-T-S/PublishingPlatform)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🔐 Demo Credentials
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Use the following test credentials to sign in:
 
-```bash
-ng generate component component-name
-```
+| Field | Value |
+| :--- | :--- |
+| **Email** | `demo@publishhub.com` |
+| **Password** | `Demo@1234` |
+| **Role** | Author / Creator |
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## ✨ Features
 
-## Building
+- **Dynamic Feed:** Curated feed of tech publications and articles pulled dynamically via API.
+- **Discover & Search:** Multi-criteria search by keyword, author, or trending topics (`#javascript`, `#angular`, `#webdev`, `#react`).
+- **Article Reader:** Clean reading experience with engagement counts (reactions, comments, reading time).
+- **Draft & Publish:** Rich article editor with cover image support and local persistence.
+- **Responsive Design:** Mobile-first, modern UI built with clean vector SVG iconography.
 
-To build the project run:
+---
 
-```bash
-ng build
-```
+## 🛠️ Tech Stack
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- **Framework:** Angular 18+ (Standalone Components, Signals)
+- **Styling:** SCSS, Flexbox/Grid
+- **Forms & State:** Angular Reactive Forms, Signals
+- **Routing:** Angular SPA Router with Vercel rewrites
+- **Hosting:** Vercel
 
-## Running unit tests
+---
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## 🚀 Getting Started Locally
 
-```bash
-ng test
-```
+### Prerequisites
+- Node.js (v18 or later recommended)
+- npm
 
-## Running end-to-end tests
+### Installation & Run
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/U-B-O-T-S/PublishingPlatform.git](https://github.com/U-B-O-T-S/PublishingPlatform.git)
+   cd PublishingPlatform
