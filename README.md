@@ -55,3 +55,4 @@ Use the following test credentials to sign in:
    ```bash
    git clone [https://github.com/U-B-O-T-S/PublishingPlatform.git](https://github.com/U-B-O-T-S/PublishingPlatform.git)
    cd PublishingPlatform
+   ```
