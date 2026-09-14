@@ -1,0 +1,66 @@
+﻿<div class="reader-container">
+  <div class="top-nav">
+    <a routerLink="/" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m15 18-6-6 6-6"/>
+      </svg>
+      <span>Back to feed</span>
+    </a>
+  </div>
+
+  <ng-container *ngIf="article$ | async as art; else loadingTpl">
+    <header class="article-header">
+      <div class="tag-row" *ngIf="art.tag_list?.length">
+        <span *ngFor="let tag of art.tag_list" class="badge">#{{ tag }}</span>
+        <span class="date">{{ art.readable_publish_date }}</span>
+      </div>
+
+      <h1 class="title">{{ art.title }}</h1>
+
+      <div class="author-bar">
+        <div class="author-info">
+          <img [src]="art.user?.profile_image || 'https://i.pravatar.cc/80'" [alt]="art.user?.name || 'Author'" />
+          <div>
+            <span class="name">{{ art.user?.name || 'Anonymous' }}</span>
+            <span class="sub-info">{{ art.reading_time_minutes || 3 }} min read</span>
+          </div>
+        </div>
+
+        <div class="interaction-bar">
+          <button class="icon-btn" [class.liked]="liked()" (click)="toggleLike(art)">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            <span>{{ art.positive_reactions_count || 0 }}</span>
+          </button>
+          <button class="icon-btn comments-trigger" (click)="openComments()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            <span>{{ art.comments_count || 0 }}</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="hero-image" *ngIf="art.cover_image">
+      <img [src]="art.cover_image" [alt]="art.title" />
+    </div>
+
+    <article class="article-body" [innerHTML]="art.body_html || art.description"></article>
+
+    <app-comment-drawer
+      [isOpen]="isCommentsOpen()"
+      [articleId]="art.id"
+      (closeDrawer)="closeComments()">
+    </app-comment-drawer>
+  </ng-container>
+
+  <ng-template #loadingTpl>
+    <div style="padding: 4rem 0; text-align: center; color: #64748b;">
+      <div style="display: inline-block; width: 32px; height: 32px; border: 3px solid #e2e8f0; border-top-color: #2563eb; border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
+      <p style="margin-top: 1rem; font-size: 0.95rem;">Loading article...</p>
+      <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
+    </div>
+  </ng-template>
+</div>

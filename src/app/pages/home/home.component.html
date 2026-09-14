@@ -1,0 +1,69 @@
+﻿<div class="home-container">
+  <div class="filter-bar">
+    <button [class.active]="currentSort() === 'popular'" (click)="changeSort('popular')">Editor's Choice</button>
+    <button [class.active]="currentSort() === 'rising'" (click)="changeSort('rising')">Trending</button>
+    <button [class.active]="currentSort() === 'fresh'" (click)="changeSort('fresh')">Latest</button>
+  </div>
+
+  <div *ngIf="articleService.loading() && !articleService.featuredArticle()" class="skeleton-wrapper">
+    <div class="skeleton-featured"></div>
+    <div class="skeleton-item" *ngFor="let i of [1, 2, 3]"></div>
+  </div>
+
+  <div *ngIf="!articleService.loading() || articleService.featuredArticle()">
+    <article *ngIf="articleService.featuredArticle() as hero" class="featured-card" [routerLink]="['/article', hero.id]">
+      <div class="hero-image-box">
+        <img [src]="hero.cover_image || hero.social_image || 'https://picsum.photos/800/400?blur=1'" [alt]="hero.title" loading="lazy" />
+      </div>
+      <div class="hero-content">
+        <h1 class="hero-title">{{ hero.title }}</h1>
+        <p class="hero-desc">{{ hero.description }}</p>
+        <div class="meta-row">
+          <span class="badge badge-popular">Featured</span>
+          <span class="dot">•</span>
+          <span class="read-time">{{ hero.reading_time_minutes }} min read</span>
+          <span class="dot">•</span>
+          <span class="stats">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 3px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            {{ hero.comments_count || 0 }} &nbsp;
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="vertical-align: -2px; margin-right: 3px; color: #ef4444;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            {{ hero.positive_reactions_count || 0 }}
+          </span>
+          <span class="author-tag">By {{ hero.user.name }}</span>
+        </div>
+      </div>
+    </article>
+
+    <div class="feed-list">
+      <article *ngFor="let article of articleService.articles()" class="feed-item" [routerLink]="['/article', article.id]">
+        <div class="item-text">
+          <h2 class="item-title">{{ article.title }}</h2>
+          <p class="item-desc">{{ article.description }}</p>
+          <div class="meta-row">
+            <span class="date">{{ article.readable_publish_date }}</span>
+            <span class="dot">•</span>
+            <span class="read-time">{{ article.reading_time_minutes }} min read</span>
+            <span class="dot">•</span>
+            <span class="stats">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 3px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              {{ article.comments_count || 0 }} &nbsp;
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="vertical-align: -2px; margin-right: 3px; color: #ef4444;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              {{ article.positive_reactions_count || 0 }}
+            </span>
+            <span class="author-tag">By {{ article.user.name }}</span>
+          </div>
+        </div>
+        <div class="item-thumbnail">
+          <img [src]="article.cover_image || article.social_image || 'https://picsum.photos/240/160'" [alt]="article.title" loading="lazy" />
+        </div>
+      </article>
+    </div>
+
+    <div class="load-more-section">
+      <button class="see-more-btn" (click)="loadMore()" [disabled]="isLoadingMore()">
+        <span *ngIf="!isLoadingMore()">See more →</span>
+        <span *ngIf="isLoadingMore()">Loading articles...</span>
+      </button>
+    </div>
+  </div>
+</div>

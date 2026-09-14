@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Import Quill core & snow theme styles */
+@import 'quill/dist/quill.core.css';
+@import 'quill/dist/quill.snow.css';
+
+/* Global clean base styling */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #1f2937;
+  background-color: #fafafa;
+}

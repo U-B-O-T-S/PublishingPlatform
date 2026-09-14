@@ -1,0 +1,95 @@
+<div class="discover-container">
+  <!-- Discover Header -->
+  <header class="discover-header">
+    <div class="header-icon">??</div>
+    <h1>Discover</h1>
+    <p>Step into a new zone, join a new conversation.</p>
+  </header>
+
+  <!-- Search & Filter Controls -->
+  <div class="search-section">
+    <div class="search-input-box">
+      <span class="icon">??</span>
+      <input 
+        type="text" 
+        placeholder="Search articles, tags, authors..." 
+        [ngModel]="searchQuery()" 
+        (ngModelChange)="searchQuery.set($event); runSearch()"
+      />
+      <select [ngModel]="filterType()" (ngModelChange)="filterType.set($event); runSearch()">
+        <option value="articles">Articles</option>
+        <option value="author">Authors</option>
+      </select>
+    </div>
+
+    <!-- Trending Tags -->
+    <div class="trending-tags">
+      <span class="label">Trending keywords:</span>
+      <button 
+        *ngFor="let tag of trendingTags" 
+        class="tag-pill" 
+        [class.active]="selectedTag() === tag"
+        (click)="onFilterTag(tag)">
+        #{{ tag }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Readers' Choice (Image 2) -->
+  <section class="section-block" *ngIf="!searchQuery()">
+    <div class="section-title-row">
+      <h2>Readers' choice</h2>
+    </div>
+    <div class="grid-cards">
+      <div *ngFor="let article of readersChoice()" class="choice-card" [routerLink]="['/article', article.id]">
+        <div class="card-thumb">
+          <img [src]="article.cover_image || article.social_image || 'https://picsum.photos/400/250'" [alt]="article.title" loading="lazy" />
+        </div>
+        <div class="card-body">
+          <h3>{{ article.title }}</h3>
+          <span class="read-info">{{ article.reading_time_minutes }} min read � {{ article.user.name }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rising Authors Directory (Image 2) -->
+  <section class="section-block">
+    <div class="section-title-row">
+      <h2>Rising authors</h2>
+      <span class="count">{{ filteredAuthors().length }} creators</span>
+    </div>
+    <div class="authors-grid">
+      <div *ngFor="let author of filteredAuthors()" class="author-card">
+        <div class="badge-tag">CREATOR</div>
+        <div class="avatar-box">
+          <img [src]="author.profile_image || 'https://i.pravatar.cc/150'" [alt]="author.name" />
+        </div>
+        <h4>{{ author.name }}</h4>
+        <span class="username">@{{ author.username }}</span>
+        <p class="bio">{{ author.bio || 'Contributing developer and technical writer on PublishHub.' }}</p>
+        <a [href]="'https://dev.to/' + author.username" target="_blank" rel="noopener" class="visit-btn">
+          Visit Profile ?
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filtered Articles Result (if searching) -->
+  <section class="section-block" *ngIf="searchQuery()">
+    <div class="section-title-row">
+      <h2>Matching Articles ({{ filteredArticles().length }})</h2>
+    </div>
+    <div class="grid-cards">
+      <div *ngFor="let article of filteredArticles()" class="choice-card" [routerLink]="['/article', article.id]">
+        <div class="card-thumb">
+          <img [src]="article.cover_image || article.social_image || 'https://picsum.photos/400/250'" [alt]="article.title" />
+        </div>
+        <div class="card-body">
+          <h3>{{ article.title }}</h3>
+          <span class="read-info">{{ article.reading_time_minutes }} min read � {{ article.user.name }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
