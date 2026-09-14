@@ -53,6 +53,6 @@ Use the following test credentials to sign in:
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/U-B-O-T-S/PublishingPlatform.git](https://github.com/U-B-O-T-S/PublishingPlatform.git)
+   git clone https://github.com/U-B-O-T-S/PublishingPlatform.git
    cd PublishingPlatform
    ```
