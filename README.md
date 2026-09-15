@@ -6,7 +6,7 @@ A modern content publishing and discovery platform built with Angular, integrati
 
 ## 🌐 Live Demo & Repository
 
-- **Live Deployment:** [https://publishing-platform-agfyxdgx1-shreyaskhorgade-7781.vercel.app](https://publishing-platform-agfyxdgx1-shreyaskhorgade-7781.vercel.app)
+- **Live Deployment:** [https://browser-kappa-tan.vercel.app](https://browser-kappa-tan.vercel.app)
 - **GitHub Repository:** [https://github.com/U-B-O-T-S/PublishingPlatform](https://github.com/U-B-O-T-S/PublishingPlatform)
 
 ---
